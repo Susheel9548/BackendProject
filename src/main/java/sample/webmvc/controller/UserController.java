@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/electronictoies")
+@RequestMapping("/")
 public class UserController {
 	
 	@RequestMapping("/")
@@ -20,7 +20,7 @@ public class UserController {
 	
 	
 //	@RequestMapping( value = "/movies", method = RequestMethod.GET)
-	@GetMapping(value = {"/movies" , "/films" })
+	@GetMapping(value = {"/movies" , "/films"  })
 	public String movie() {
 		
 		System.out.println("UserController.movie()");
