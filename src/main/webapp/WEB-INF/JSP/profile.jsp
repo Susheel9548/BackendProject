@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body bgcolor="green">
-     <h1>Welcom to my KITCHEN APPLIED web page</h1>
+     <h1>Welcom to my first web page</h1>
+     <h2> Hello user  this is your username: ${username}</h2>
+     <h2> Hello user  this is your password: ${password}</h2>
+     
 </body>
 </html> 
