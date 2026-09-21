@@ -3,6 +3,7 @@ package sample.webmvc.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -25,6 +26,14 @@ public class UserController {
 		System.out.println("Usercontroller.greet() :" );
 		return "login";
 	}
+	
+	@GetMapping("/path/{id}")
+	public String pathVariable(@PathVariable(name = "id") int id) {
+		System.out.println("Usercontroller.pathVariable() :" +id );
+		return "welcome";
+	}
+	
+
 	
 	@PostMapping("/login")
 	public String userLogin(@RequestParam(name = "username") String username,@RequestParam(name = "password") String password , Model model) {
