@@ -7,9 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body bgcolor="green">
-     <h1>Welcom to my first web page</h1>
-     <h2> Hello user  this is your username: ${username}</h2>
-     <h2> Hello user  this is your password: ${password}</h2>
      
+	<h1>Hello User This is your welcome Page</h1>
+	<h2>Hello User This is your username: ${username} </h2>
+	<h2>Hello User This is your password: ${password} </h2>
+   
 </body>
-</html> 
+</html>     

@@ -1,5 +1,6 @@
 package sample.webmvc.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,17 +8,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import sample.webmvc.entity.User;
+import sample.webmvc.service.UserService;
+
 @Controller
 public class UserController {
 	
+	@Autowired
+	private UserService userService;
 	
-//	@RequestParam can read Query parameter
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
 	@GetMapping("/")
-	public String greet(@RequestParam(name = "user", defaultValue  = "GuestUser") String user , Model model) {
-		System.out.println("Usercontroller.greet() :" +user);
-		
-		model.addAttribute("user", user);
-		
+	public String greet() {
+		System.out.println("Usercontroller.greet() :" );
+	
 		return "welcome";
 	}
 	
@@ -31,6 +39,26 @@ public class UserController {
 	public String pathVariable(@PathVariable(name = "id") int id) {
 		System.out.println("Usercontroller.pathVariable() :" +id );
 		return "welcome";
+	}
+	
+	@GetMapping("/sign-up")
+	public String signUp() {
+		System.out.println("Usercontroller.signUp() :" );
+		return "signup";
+	}
+	
+	@PostMapping("/sign-up")
+	public String saveUser(@RequestParam(name = "name") String name,@RequestParam(name = "gender") String gender,@RequestParam(name = "address") String address , Model model) {
+		System.out.println("Usercontroller.greet() :" +name );
+		System.out.println("Usercontroller.greet() :" +gender );
+		
+		User user = new User(name, gender, address);
+		
+		userService.saveUser(user);
+		
+		model.addAttribute("user", user);
+		
+		return "success";
 	}
 	
 
