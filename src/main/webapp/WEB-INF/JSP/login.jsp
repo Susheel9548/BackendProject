@@ -66,7 +66,7 @@
 
     <div class="login-container">
 
-        <h2>Office Management</h2>
+        <h2>Login page</h2>
 
         <form action="${pageContext.request.contextPath}/login" method="post">
 
