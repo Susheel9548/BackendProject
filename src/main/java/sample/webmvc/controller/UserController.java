@@ -1,5 +1,8 @@
 package sample.webmvc.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,41 +15,51 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sample.webmvc.entity.User;
-import sample.webmvc.service.UserService;
 
 @Controller
+@ResponseBody
 public class UserController {
 
-	@Autowired
-	private UserService userService;
+	static Map<Integer, User> users = new HashMap<>();
 
-	public void setUserService(UserService userService) {
-		this.userService = userService;
+	static {
+		users.put(1, new User(1, "Anuj", "Male", "Noida"));
+		users.put(2, new User(2, "Kunal", "Male", "Haryana"));
+		users.put(3, new User(3, "Nikil", "Male", "Delhi"));
+		users.put(4, new User(4, "Anmol", "Male", "Gurgaon"));
+		users.put(5, new User(5, "Arjun", "Male", "Noida"));
+
 	}
 
-	@GetMapping("/")
-	public String greet() {
+	@GetMapping
+	public User greet() {
 		System.out.println("Usercontroller.greet() :");
 
-		return "welcome";
+		return new User(99, "Dummy", "No gender", "Planet not found");
 	}
 
 	@GetMapping("/{id}")
-	@ResponseBody
 	public User pathVariable(@PathVariable(name = "id") int id) {
 		System.out.println("Usercontroller.pathVariable() :" + id);
 
-		return userService.getUserById(id);
+		return users.get(id);
+	}
+
+	@GetMapping("/all-users")
+	public Map<Integer, User> getAllUsers() {
+		System.out.println("Usercontroller.getAllUsers()");
+
+		return users;
 	}
 
 	@PostMapping
-	@ResponseBody
 	public User saveUser(@RequestBody User user) {
 		System.out.println("Usercontroller.saveUser :");
 		System.out.println(user);
 
+		users.put(user.getId(), user);
 
-		return userService.saveUser(user);
+		return user;
 	}
 
 }
