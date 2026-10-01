@@ -3,6 +3,7 @@ package sample.webmvc.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import sample.webmvc.entity.User;
 
@@ -27,10 +28,10 @@ public class UserDao {
 	}
 
     //SAVE
-	public void saveUser(User user) {
+	@Transactional
+	public User saveUser(User user) {
 		hibernateTemplate.save(user);
-		System.out .println("userDao.saveUser");
-		
+		return user;
 	}
 	
 	//READ
@@ -42,21 +43,5 @@ public class UserDao {
 		
 	}
 	
-	//UPDATE
-	public void updateUser(User user) {
-		hibernateTemplate.update(user);
-		System.out.println("userDao.updateUser()");
-		
-	}
-
-
-	public void deleteUser(int id) {
-		User user = hibernateTemplate.get(User.class, id);
-		if(user != null) {
-			hibernateTemplate.delete(user);
-		}
-		System.out.println("usreDao.deleteUser"); 
-		
-	}
-
+	
 }

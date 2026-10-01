@@ -19,8 +19,8 @@ public class UserService {
 	}
 
 	@Transactional(readOnly = false)
-	public void saveUser(User user) {
-		userDao.saveUser(user);
+	public User saveUser(User user) {
+		return userDao.saveUser(user);
 	}
 
 	public User getUserById(int id) {
@@ -29,17 +29,6 @@ public class UserService {
 		return userDao.getUserById(id);
 	}
 
-	@Transactional(readOnly = false)
-	public void updateUser(User user) {
-		userDao.updateUser(user);
-		System.out.println("UserService.updateUser()");
-	}
-
-	@Transactional(readOnly = false)
-	public void deleteUser(int id) {
-		userDao.deleteUser(id);
-		System.out.println("UserService.deleteUser()");
-
-	}
+	
 
 }
